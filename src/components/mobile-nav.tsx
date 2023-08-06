@@ -5,6 +5,7 @@ import { MainNavItem } from "@/types"
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 import { Icons } from "@/components/icons"
+import { ModeToggle } from "./ui/mode-toggle"
 
 interface MobileNavProps {
   items: MainNavItem[]
@@ -38,6 +39,9 @@ export function MobileNav({ items, children }: MobileNavProps) {
           ))}
         </nav>
         {children}
+      </div>
+      <div className="absolute bottom-2 left-6">
+        <ModeToggle />
       </div>
     </div>
   )
