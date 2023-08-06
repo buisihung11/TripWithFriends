@@ -65,6 +65,19 @@
     --destructive-foreground: 0 85.7% 97.3%;
  
     --ring: 217.2 32.6% 17.5%;
+
+    --french-rose-50: #fef2f3;
+    --french-rose-100: #fee5e9;
+    --french-rose-200: #fccfd7;
+    --french-rose-300: #faa7b8;
+    --french-rose-400: #f67692;
+    --french-rose-500: #ef597d;
+    --french-rose-600: #da2459;
+    --french-rose-700: #b7194a;
+    --french-rose-800: #9a1744;
+    --french-rose-900: #841740;
+    --french-rose-950: #49081e;
+
   }
 }
  
