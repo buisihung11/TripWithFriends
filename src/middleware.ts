@@ -1,4 +1,4 @@
-import { authMiddleware } from "@clerk/nextjs"
+import { authMiddleware, redirectToSignIn } from "@clerk/nextjs"
 
 export default authMiddleware({
   publicRoutes: ["/", "/api(.*)", "/api/cron"],
