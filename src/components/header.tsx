@@ -15,7 +15,7 @@ export function Header({
   ...props
 }: HeaderProps) {
   return (
-    <div className={cn("space-y-3 px-2", className)} {...props}>
+    <div className={cn("space-y-3", className)} {...props}>
       <div className="grid gap-1">
         <h1
           className={cn(
