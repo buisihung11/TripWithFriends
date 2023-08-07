@@ -38,3 +38,19 @@ export type SidebarNavItem = {
       items: NavLink[]
     }
 )
+
+export type TripMate = {
+  id: string
+  name: string
+  avatar: string
+}
+
+export type Journal = {
+  id: string
+  image: string
+  title: string
+  from: DateTime
+  to: DateTime
+  description: string
+  tripMates: TripMate[]
+}
