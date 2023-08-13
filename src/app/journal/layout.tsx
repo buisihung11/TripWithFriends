@@ -15,7 +15,6 @@ interface JournalLayoutProps {
 export default async function JournalLayout({ children }: JournalLayoutProps) {
   const { userId } = auth()
   const user = await currentUser()
-  console.log(user, userId)
 
   return (
     <div className="flex min-h-screen flex-col">

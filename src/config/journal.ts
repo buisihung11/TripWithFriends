@@ -3,7 +3,7 @@ import { JournalConfig } from "@/types"
 export const journalConfig: JournalConfig = {
   mainNav: [
     {
-      title: "Entries",
+      title: "Journal",
       href: "/journal",
     },
     {
@@ -17,7 +17,7 @@ export const journalConfig: JournalConfig = {
   ],
   sidebarNav: [
     {
-      title: "Entries",
+      title: "Journal",
       href: "/journal",
       icon: "post",
     },
