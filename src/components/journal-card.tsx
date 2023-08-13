@@ -38,7 +38,7 @@ const TripMateList = ({ tripMates }: { tripMates: TripMate[] }) => {
 export default function JournalCard({ journal }: { journal: Journal }) {
   return (
     <div
-      className="bg-transparent space-y-4 rounded-md p-2 border-solid border border-gray-100 dark:border-gray-800"
+      className="cursor-pointer bg-transparent space-y-4 rounded-md p-2 border-solid border border-gray-100 dark:border-gray-800"
       key={journal.id}
     >
       <AspectRatio ratio={16 / 9} className="w-100 rounded-lg">
