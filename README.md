@@ -12,6 +12,7 @@ This is a web application that allows users to create trips and invite their fri
 
 ## To Do
 
-- [x] Create Journal card and show list of active journal in dashboard
+- [x] Journal card and show list of active journal in dashboard
+- [x] Create Journal form
 - [ ] Create DB with Prisma and PlanetScale
 - [ ] Create Journal Page
