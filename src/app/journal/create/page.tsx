@@ -106,7 +106,6 @@ export default function JournalPage() {
 
         toast({
           title: "Trip created successfully",
-          variant: "success",
         })
 
         form.reset()
