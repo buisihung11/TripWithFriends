@@ -1,3 +1,9 @@
+import { type FileWithPath } from "react-dropzone"
+
+export type FileWithPreview = FileWithPath & {
+  preview: string
+}
+
 export type SiteConfig = {
   name: string
   description: string
@@ -54,3 +60,4 @@ export type Journal = {
   description: string
   tripMates: TripMate[]
 }
+
