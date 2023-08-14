@@ -120,11 +120,12 @@ export default function JournalPage() {
         console.log(response)
 
         if (!response?.ok) {
-          return toast({
+          toast({
             title: "Something went wrong.",
             description: "Your entry was not saved. Please try again.",
             variant: "destructive",
           })
+          return
         }
 
         const createdJournal = (await response.json()) as Journal
