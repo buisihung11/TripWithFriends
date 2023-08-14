@@ -5,7 +5,7 @@ import { db } from "@/lib/db"
 import type { User } from "@clerk/nextjs/api"
 import { Webhook, WebhookRequiredHeaders } from "svix"
 
-const webhookSecret = process.env.CLERK_WEBHOOK_SECRET
+const webhookSecret = process.env.CLERK_WEBHOOK_SECRET as string
 
 type UnwantedKeys =
   | "emailAddresses"
