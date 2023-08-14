@@ -1,91 +1,26 @@
 import Link from "next/link"
-import { Journal } from "@/types"
 
+import { getUserByClerkId } from "@/lib/auth"
+import { db } from "@/lib/db"
 import { Button } from "@/components/ui/button"
 import { Shell } from "@/components/ui/shell"
 import { Header } from "@/components/header"
 import { Icons } from "@/components/icons"
 import JournalList from "@/components/journal/journal-list"
 
-const JOURNALS: Journal[] = [
-  {
-    id: "1",
-    title: "Trip to Japan",
-    from: "2021-01-24",
-    to: "2021-08-12",
-    description: "A trip to Japan with my friends.",
-    image: "https://source.unsplash.com/1600x900/?japan",
-    tripMates: [
-      {
-        id: "1",
-        name: "John Doe",
-        avatar: "https://source.unsplash.com/100x100/?face",
-      },
-      {
-        id: "2",
-        name: "Jane Doe",
-        avatar: "https://source.unsplash.com/100x100/?face",
-      },
-    ],
-  },
-  {
-    id: "2",
-    title: "Trip to DK",
-    from: "2021-01-24",
-    to: "2021-08-12",
-    description: "A trip to Japan with my friends.",
-    image: "https://source.unsplash.com/1600x900/?denmark",
-    tripMates: [
-      {
-        id: "1",
-        name: "John Doe",
-        avatar: "https://source.unsplash.com/100x100/?face",
-      },
-      {
-        id: "2",
-        name: "Jane Doe",
-        avatar: "https://source.unsplash.com/100x100/?face",
-      },
-      {
-        id: "3",
-        name: "Jane Doe",
-        avatar: "https://source.unsplash.com/100x100/?face",
-      },
-    ],
-  },
-  {
-    id: "3",
-    title: "Trip to VietNam",
-    from: "2021-01-24",
-    to: "2021-08-12",
-    description: "A trip to VietNam with my friends.",
-    image: "https://source.unsplash.com/1600x900/?vietnam",
-    tripMates: [
-      {
-        id: "1",
-        name: "John Doe",
-        avatar: "https://source.unsplash.com/100x100/?face",
-      },
-      {
-        id: "2",
-        name: "Jane Doe",
-        avatar: "https://source.unsplash.com/100x100/?face",
-      },
-      {
-        id: "3",
-        name: "Jane Doe",
-        avatar: "https://source.unsplash.com/100x100/?face",
-      },
-      {
-        id: "4",
-        name: "Jane Doe",
-        avatar: "https://source.unsplash.com/100x100/?face",
-      },
-    ],
-  },
-]
+export default async function JournalPage() {
+  const user = await getUserByClerkId()
 
-export default function JournalPage() {
+  // THIS WILL BE EXCUTED ON THE SERVER
+  const journals = await db.journal.findMany({
+    where: {
+      userId: user?.id,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  })
+
   return (
     <Shell>
       <Header
@@ -100,7 +35,7 @@ export default function JournalPage() {
           </Button>
         </Link>
       </Header>
-      <JournalList title="Ongoing journal" journalEntries={JOURNALS} />
+      <JournalList title="Ongoing journal" journals={journals} />
     </Shell>
   )
 }
