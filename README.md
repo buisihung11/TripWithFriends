@@ -14,5 +14,11 @@ This is a web application that allows users to create trips and invite their fri
 
 - [x] Journal card and show list of active journal in dashboard
 - [x] Create Journal form
-- [ ] Create DB with Prisma and PlanetScale
-- [ ] Create Journal Page
+- [x] Create DB with Prisma and PlanetScale
+- [x] Create an webhook when user sign up with Clerk
+  - [x] Setup on Clerk
+  - [x] Create an API endpoint
+  - [x] Save to DB
+- [ ] Save Journal to DB
+- [ ] Load all journal of an user
+- [ ] Add middleware for private route api

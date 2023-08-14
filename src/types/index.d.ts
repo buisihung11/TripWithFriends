@@ -53,11 +53,10 @@ export type TripMate = {
 
 export type Journal = {
   id: string
-  image: string
+  imageUrl: string
   title: string
-  from: DateTime
-  to: DateTime
+  fromDate: DateTime
+  toDate: DateTime
   description: string
-  tripMates: TripMate[]
+  tripMates: TripMate[] | null
 }
-

@@ -1,4 +1,5 @@
-import { Journal, TripMate } from "@/types"
+import { TripMate } from "@/types"
+import { Journal } from "@prisma/client"
 import { AspectRatio } from "@radix-ui/react-aspect-ratio"
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar"
 import { format, parseISO } from "date-fns"
@@ -17,6 +18,19 @@ const TripMateAvatar = ({
     </Avatar>
   )
 }
+
+const TRIP_MATES: TripMate[] = [
+  {
+    id: "1",
+    name: "John Doe",
+    avatar: "https://source.unsplash.com/100x100/?face",
+  },
+  {
+    id: "2",
+    name: "Jane Doe",
+    avatar: "https://source.unsplash.com/100x100/?face",
+  },
+]
 
 const TripMateList = ({ tripMates }: { tripMates: TripMate[] }) => {
   return (
@@ -41,10 +55,13 @@ export default function JournalCard({ journal }: { journal: Journal }) {
       className="cursor-pointer bg-transparent space-y-4 rounded-md p-2 border-solid border border-gray-100 dark:border-gray-800"
       key={journal.id}
     >
-      <AspectRatio ratio={16 / 9} className="w-100 rounded-lg">
+      <AspectRatio
+        ratio={16 / 9}
+        className="w-100 rounded-lg bg-gray-400 min-h-4"
+      >
         <img
           className="w-full h-full object-cover rounded-lg"
-          src={journal.image}
+          src={journal.imageUrl}
           alt={journal.title}
         />
       </AspectRatio>
@@ -52,10 +69,10 @@ export default function JournalCard({ journal }: { journal: Journal }) {
         <h4 className="text-base font-semibold">{journal.title}</h4>
         <div className="flex justify-between items-center">
           <div className="text-sm text-sky-500">
-            {format(parseISO(journal.from), "dd MMM")} -{" "}
-            {format(parseISO(journal.to), "dd MMM")}
+            {format(journal.fromDate as Date, "dd MMM")} -{" "}
+            {format(journal.toDate as Date, "dd MMM")}
           </div>
-          <TripMateList tripMates={journal.tripMates} />
+          <TripMateList tripMates={TRIP_MATES} />
         </div>
       </div>
     </div>

@@ -32,10 +32,12 @@ import { Zoom } from "@/components/zoom-image"
 import "@uploadthing/react/styles.css"
 
 import { useState, useTransition } from "react"
-import { FileWithPreview } from "@/types"
+import { useRouter } from "next/navigation"
+import { FileWithPreview, Journal } from "@/types"
 
 import { useToast } from "@/components/ui/use-toast"
 import { FileDialog } from "@/components/file-dialog"
+import { Icons } from "@/components/icons"
 import { OurFileRouter } from "@/app/api/uploadthing/core"
 
 const createJournalSchema = z.object({
@@ -57,9 +59,11 @@ const createJournalSchema = z.object({
 const { useUploadThing } = generateReactHelpers<OurFileRouter>()
 
 export default function JournalPage() {
-  const [files, setFiles] = useState<FileWithPreview[] | null>(null)
-
   const { toast } = useToast()
+  const router = useRouter()
+
+  const [files, setFiles] = useState<FileWithPreview[] | null>(null)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const [isPending, startTransition] = useTransition()
   const { isUploading, startUpload } = useUploadThing("imageUploader")
@@ -83,6 +87,8 @@ export default function JournalPage() {
     console.log(data)
     startTransition(async () => {
       try {
+        setIsSubmitting(true)
+
         // await checkProductAction({
         //   name: data.name,
         // })
@@ -97,25 +103,47 @@ export default function JournalPage() {
               return formattedImages ?? null
             })
           : null
-        console.log(images)
-        // await addProductAction({
-        //   ...data,
-        //   storeId,
-        //   images,
-        // })
 
+        const response = await fetch("/api/journal", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            title: data.title,
+            fromDate,
+            toDate,
+            imageUrl: images?.[0]?.url ?? null,
+          }),
+        })
+
+        console.log(response)
+
+        if (!response?.ok) {
+          return toast({
+            title: "Something went wrong.",
+            description: "Your entry was not saved. Please try again.",
+            variant: "destructive",
+          })
+        }
+
+        const createdJournal = (await response.json()) as Journal
+        console.log(createdJournal)
         toast({
-          title: "Trip created successfully",
+          title: `Trip ${createdJournal.id} created successfully`,
         })
 
         form.reset()
         setFiles(null)
+        router.refresh()
       } catch (err) {
         console.log(err)
         toast({
           title: "Something went wrong",
           variant: "destructive",
         })
+      } finally {
+        setIsSubmitting(false)
       }
     })
   }
@@ -242,7 +270,7 @@ export default function JournalPage() {
 
           <FormItem className="flex w-full flex-col">
             <FormLabel>Images</FormLabel>
-            {!isUploading && previews?.length ? (
+            {previews?.length ? (
               <div className="flex items-center gap-2">
                 {previews.map((file: any) => (
                   <Zoom key={file.name}>
@@ -271,7 +299,15 @@ export default function JournalPage() {
             </FormControl>
           </FormItem>
 
-          <Button type="submit">Submit</Button>
+          <Button disabled={isSubmitting} type="submit">
+            {isSubmitting && (
+              <Icons.spinner
+                className="mr-2 h-4 w-4 animate-spin"
+                aria-hidden="true"
+              />
+            )}
+            Submit
+          </Button>
         </form>
       </Form>
     </Shell>
