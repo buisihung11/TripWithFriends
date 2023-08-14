@@ -3,6 +3,7 @@ import { Journal } from "@prisma/client"
 import { AspectRatio } from "@radix-ui/react-aspect-ratio"
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar"
 import { format, parseISO } from "date-fns"
+import Image from "next/image"
 
 const TripMateAvatar = ({
   imageUrl,
@@ -59,11 +60,13 @@ export default function JournalCard({ journal }: { journal: Journal }) {
         ratio={16 / 9}
         className="w-100 rounded-lg bg-gray-400 min-h-4"
       >
-        <img
-          className="w-full h-full object-cover rounded-lg"
-          src={journal.imageUrl}
-          alt={journal.title}
-        />
+        {journal.imageUrl && (
+          <Image
+            className="w-full h-full object-cover rounded-lg"
+            src={journal.imageUrl}
+            alt={journal.title}
+          />
+        )}
       </AspectRatio>
       <div className="space-y-1">
         <h4 className="text-base font-semibold">{journal.title}</h4>
