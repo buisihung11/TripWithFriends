@@ -1,18 +1,16 @@
 "use client"
+
 /* eslint-disable @next/next/no-img-element */
+import { Journal } from "@prisma/client"
 
 import JournalCard from "@/components/journal-card"
-import { Journal } from "@prisma/client"
 
 interface JournalListProps {
   title: string
   journals: Journal[]
 }
 
-export default function JournalList({
-  title,
-  journals,
-}: JournalListProps) {
+export default function JournalList({ title, journals }: JournalListProps) {
   return (
     <div className="flex flex-col space-y-4">
       <h2 className="text-xl font-bold tracking-tight">{title}</h2>

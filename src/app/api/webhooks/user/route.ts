@@ -1,9 +1,10 @@
 import { IncomingHttpHeaders } from "http"
 import { headers } from "next/headers"
 import { NextResponse } from "next/server"
-import { db } from "@/lib/db"
 import type { User } from "@clerk/nextjs/api"
 import { Webhook, WebhookRequiredHeaders } from "svix"
+
+import { db } from "@/lib/db"
 
 const webhookSecret = process.env.CLERK_WEBHOOK_SECRET as string
 

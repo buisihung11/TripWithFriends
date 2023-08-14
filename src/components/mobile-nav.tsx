@@ -5,6 +5,7 @@ import { MainNavItem } from "@/types"
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 import { Icons } from "@/components/icons"
+
 import { ModeToggle } from "./ui/mode-toggle"
 
 interface MobileNavProps {

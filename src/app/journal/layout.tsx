@@ -2,11 +2,11 @@ import { notFound } from "next/navigation"
 import { auth, currentUser } from "@clerk/nextjs"
 
 import { journalConfig } from "@/config/journal"
+import { ModeToggle } from "@/components/ui/mode-toggle"
 import { MainNav } from "@/components/main-nav"
 import { JournalNav } from "@/components/nav"
 // import SiteFooter from "@/components/site-footer"
 import { UserAccountNav } from "@/components/user-account-nav"
-import { ModeToggle } from "@/components/ui/mode-toggle"
 
 interface JournalLayoutProps {
   children?: React.ReactNode

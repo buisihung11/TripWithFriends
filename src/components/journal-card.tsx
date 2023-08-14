@@ -1,9 +1,9 @@
+import Image from "next/image"
 import { TripMate } from "@/types"
 import { Journal } from "@prisma/client"
 import { AspectRatio } from "@radix-ui/react-aspect-ratio"
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar"
 import { format, parseISO } from "date-fns"
-import Image from "next/image"
 
 const TripMateAvatar = ({
   imageUrl,
