@@ -65,6 +65,9 @@ export default function JournalCard({ journal }: { journal: Journal }) {
             className="w-full h-full object-cover rounded-lg"
             src={journal.imageUrl}
             alt={journal.title}
+            fill
+            // width={400}
+            // height={200}
           />
         )}
       </AspectRatio>
