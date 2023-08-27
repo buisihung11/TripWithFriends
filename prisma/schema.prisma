@@ -6,8 +6,8 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
 
@@ -22,7 +22,8 @@ model User {
 
   momoPhoneNumber String?
 
-  journals Journal[]
+  journals           Journal[]
+  Attraction         Attraction[]
 
   @@map(name: "users")
 }
@@ -42,3 +43,30 @@ model Journal {
   @@unique([userId, id])
   @@map(name: "journals")
 }
+
+model Attraction {
+  id                 String               @id @default(cuid())
+  name               String
+  imageUrl           String?
+  createdAt          DateTime             @default(now()) @map(name: "created_at")
+  updatedAt          DateTime             @updatedAt @map(name: "updated_at")
+  createdByUserId    String
+  createdByUser      User                 @relation(fields: [createdByUserId], references: [id])
+  // UserVoteAttraction UserVoteAttraction[]
+
+  @@index([createdByUserId])
+  @@map(name: "attractions")
+}
+
+// model UserVoteAttraction {
+//   id           String     @id @default(cuid())
+//   createdAt    DateTime   @default(now()) @map(name: "created_at")
+//   updatedAt    DateTime   @updatedAt @map(name: "updated_at")
+//   userId       String
+//   attractionId String
+//   attraction   Attraction @relation(fields: [attractionId], references: [id])
+//   user         User       @relation(fields: [userId], references: [id])
+
+//   @@unique([userId, attractionId])
+//   @@map(name: "user_vote_attractions")
+// }
