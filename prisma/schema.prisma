@@ -48,6 +48,7 @@ model Attraction {
   id                 String               @id @default(cuid())
   name               String
   imageUrl           String?
+  attractionType     String
   createdAt          DateTime             @default(now()) @map(name: "created_at")
   updatedAt          DateTime             @updatedAt @map(name: "updated_at")
   createdByUserId    String
