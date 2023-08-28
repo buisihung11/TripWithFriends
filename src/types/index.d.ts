@@ -50,13 +50,3 @@ export type TripMate = {
   name: string
   avatar: string
 }
-
-export type Journal = {
-  id: string
-  imageUrl: string
-  title: string
-  fromDate: DateTime
-  toDate: DateTime
-  description: string
-  tripMates: TripMate[] | null
-}
