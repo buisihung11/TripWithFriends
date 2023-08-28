@@ -33,12 +33,13 @@ import "@uploadthing/react/styles.css"
 
 import { useState, useTransition } from "react"
 import { useRouter } from "next/navigation"
-import { FileWithPreview, Journal } from "@/types"
+import { FileWithPreview } from "@/types"
 
 import { useToast } from "@/components/ui/use-toast"
 import { FileDialog } from "@/components/file-dialog"
 import { Icons } from "@/components/icons"
 import { OurFileRouter } from "@/app/api/uploadthing/core"
+import { Journal } from "@prisma/client"
 
 const createJournalSchema = z.object({
   title: z.string().min(3, "Title must be at least 3 characters"),
@@ -178,12 +179,12 @@ export default function JournalPage() {
             )}
           />
 
-          <div className="flex w-full flex-col sm:flex-row items-start gap-4">
+          <div className="flex w-full flex-col items-start gap-4 sm:flex-row">
             <FormField
               control={form.control}
               name="from"
               render={({ field }) => (
-                <FormItem className="flex flex-col w-full">
+                <FormItem className="flex w-full flex-col">
                   <FormLabel>From date</FormLabel>
 
                   <Popover>
@@ -206,7 +207,7 @@ export default function JournalPage() {
                       </FormControl>
                     </PopoverTrigger>
                     <PopoverContent
-                      className="w-auto p-0 bg-background"
+                      className="w-auto bg-background p-0"
                       align="start"
                     >
                       <Calendar
@@ -226,7 +227,7 @@ export default function JournalPage() {
               control={form.control}
               name="to"
               render={({ field }) => (
-                <FormItem className="flex flex-col w-full">
+                <FormItem className="flex w-full flex-col">
                   <FormLabel>To date</FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
@@ -248,7 +249,7 @@ export default function JournalPage() {
                       </FormControl>
                     </PopoverTrigger>
                     <PopoverContent
-                      className="w-auto p-0 bg-background"
+                      className="w-auto bg-background p-0"
                       align="start"
                     >
                       <Calendar
