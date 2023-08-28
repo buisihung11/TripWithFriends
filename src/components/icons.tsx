@@ -29,6 +29,8 @@ import {
   User,
   X,
   XCircle,
+  UserPlus2,
+  Heart,
 } from "lucide-react"
 
 export type Icon = React.FC<LucideProps>
@@ -152,4 +154,6 @@ export const Icons = {
   twitter: Twitter,
   checkCircle: CheckCircle2,
   xCircle: XCircle,
+  userPlus: UserPlus2,
+  heart: Heart,
 }
