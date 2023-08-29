@@ -52,7 +52,7 @@ model Attraction {
   attractionType  EnumAttractionType @map(name: "attraction_type")
   createdAt       DateTime           @default(now()) @map(name: "created_at")
   updatedAt       DateTime           @updatedAt @map(name: "updated_at")
-  goOnDate        DateTime          @map(name: "go_on_date")
+  goOnDate        DateTime           @map(name: "go_on_date")
   createdByUserId String
   createdByUser   User               @relation(fields: [createdByUserId], references: [id])
   description     String?
