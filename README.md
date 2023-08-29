@@ -19,6 +19,14 @@ This is a web application that allows users to create trips and invite their fri
   - [x] Setup on Clerk
   - [x] Create an API endpoint
   - [x] Save to DB
-- [ ] Save Journal to DB
-- [ ] Load all journal of an user
+- [x] Save Journal to DB
+- [x] Load all journal of an user
+- [ ] Setup default to /journal page
+
+### Deail journal page
+- [ ] UI
+- [ ] CRUD Attraction
+
+### Security
+
 - [ ] Add middleware for private route api

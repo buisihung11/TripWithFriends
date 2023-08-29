@@ -4,7 +4,6 @@ import { db } from "./db"
 
 export const getUserByClerkId = async () => {
   const { userId } = auth()
-
   if (userId) {
     try {
       const user = await db.user.findUniqueOrThrow({

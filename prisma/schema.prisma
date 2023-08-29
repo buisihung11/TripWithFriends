@@ -6,8 +6,8 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
 
@@ -22,7 +22,8 @@ model User {
 
   momoPhoneNumber String?
 
-  journals Journal[]
+  journals   Journal[]
+  Attraction Attraction[]
 
   @@map(name: "users")
 }
@@ -36,9 +37,58 @@ model Journal {
   createdAt DateTime  @default(now()) @map(name: "created_at")
   updatedAt DateTime  @updatedAt @map(name: "updated_at")
 
-  userId String
-  user   User   @relation(fields: [userId], references: [id])
+  userId     String
+  user       User         @relation(fields: [userId], references: [id])
+  Attraction Attraction[]
 
   @@unique([userId, id])
   @@map(name: "journals")
+}
+
+model Attraction {
+  id              String             @id @default(cuid())
+  name            String
+  imageUrl        String? // TODO: Change to images
+  attractionType  EnumAttractionType @map(name: "attraction_type")
+  createdAt       DateTime           @default(now()) @map(name: "created_at")
+  updatedAt       DateTime           @updatedAt @map(name: "updated_at")
+  goOnDate        DateTime           @map(name: "go_on_date")
+  createdByUserId String
+  createdByUser   User               @relation(fields: [createdByUserId], references: [id])
+  description     String?
+  address         String?
+  link            String?
+  journalId       String
+  journal         Journal            @relation(fields: [journalId], references: [id])
+  // UserVoteAttraction UserVoteAttraction[]
+
+  @@index([createdByUserId])
+  @@index([journalId])
+  @@map(name: "attractions")
+}
+
+// model UserVoteAttraction {
+//   id           String     @id @default(cuid())
+//   createdAt    DateTime   @default(now()) @map(name: "created_at")
+//   updatedAt    DateTime   @updatedAt @map(name: "updated_at")
+//   userId       String
+//   attractionId String
+//   attraction   Attraction @relation(fields: [attractionId], references: [id])
+//   user         User       @relation(fields: [userId], references: [id])
+
+//   @@unique([userId, attractionId])
+//   @@map(name: "user_vote_attractions")
+// }
+
+enum EnumAttractionType {
+  COFFEE
+  FOOD
+  DRINK
+  BEACH
+  SHOPPING
+  WALK
+  WALLET
+  LANDSCAPE
+  BIKE
+  OTHERS
 }
