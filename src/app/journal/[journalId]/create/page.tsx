@@ -44,9 +44,9 @@ const createAttractionSchema = z.object({
     .optional()
     .nullable()
     .default(null),
-  address: z.string().nullable(),
-  description: z.string().nullable(),
-  link: z.string().nullable(),
+  address: z.string().optional(),
+  description: z.string().optional(),
+  link: z.string().optional(),
   attractionType: z
     .nativeEnum(EnumAttractionType)
     .default(EnumAttractionType.OTHERS),
@@ -269,7 +269,7 @@ export default function CreateAttractionPage({
           <FormItem className="col-span-12">
             <FormField
               control={form.control}
-              name="description"
+              name="address"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Address</FormLabel>
@@ -286,7 +286,7 @@ export default function CreateAttractionPage({
           <FormItem className="col-span-12">
             <FormField
               control={form.control}
-              name="address"
+              name="description"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Description</FormLabel>

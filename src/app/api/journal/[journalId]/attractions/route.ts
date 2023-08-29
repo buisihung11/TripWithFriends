@@ -38,6 +38,7 @@ export async function POST(
     const entry = await db.attraction.create({
       data: {
         ...body,
+        attractionType: body.attractionType as EnumAttractionType,
         createdByUserId: user.id,
         journalId: params.journalId,
         goOnDate: new Date(), // TODO: Get the first day of the trip from the journal from field

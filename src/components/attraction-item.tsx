@@ -10,6 +10,11 @@ interface AttractionItemProps {
 }
 
 export default function AttractionItem({ attraction }: AttractionItemProps) {
+
+  // TODO: Implement like button
+  const userLiked = true
+  const likedCount = 0
+
   return (
     <Card className=" flex flex-row items-center gap-2 p-2">
       <div className=" text-center">
@@ -40,16 +45,16 @@ export default function AttractionItem({ attraction }: AttractionItemProps) {
         >
           <Icons.heart
             className={cn(
-              attraction.liked && "fill-fuchsia-600 stroke-fuchsia-500"
+              userLiked && "fill-fuchsia-600 stroke-fuchsia-500"
             )}
           />
           <p
             className={cn(
               "block text-[10px]/[12px]",
-              attraction.liked && "text-fuchsia-600"
+              userLiked && "text-fuchsia-600"
             )}
           >
-            {attraction.likedCount}
+            {likedCount}
           </p>
         </Button>
       </div>
